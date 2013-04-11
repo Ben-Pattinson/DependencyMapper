@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:ps="http://schemas.microsoft.com/wix/PSExtension">
+	<Product Id="*" Name="GetBuildLocation Powershell Snapin Installer" Language="1033" Version="1.1.0.0" Manufacturer="Ben Pattinson" UpgradeCode="90FE7800-B429-47CD-A00B-58A193BAB3E4">
+		<Package InstallerVersion="200" Compressed="yes"  />
+		<Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="INSTALLDIR" Name="GetBuildLocationPSSnapIn">
+					<Component Id="BuildLocationPSSnapinComponent" Guid="1E8B4D0F-963A-4EAE-AF01-1609DA58000A">
+						<File Id="BuildLocationPSSnapin" Name="GetBuildLocationPSSnapIn.dll" Source="$(var.GetBuildLocationPSSnapIn.TargetPath)" KeyPath="yes" Assembly=".net">
+							<ps:SnapIn Id="BenPattinson.GetBuildLocation.PSSnapIn" AssemblyName="GetBuildLocationPSSnapIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ec7c3f4a092e5aaf" Description="Get Build Location of .net Assemblies" Vendor="Ben Pattinson">
+							</ps:SnapIn>
+						</File>
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id="DefaultFeature" Level="1">			
+			<ComponentRef Id="BuildLocationPSSnapinComponent" />			
+		</Feature>		
+	</Product>
+</Wix>
